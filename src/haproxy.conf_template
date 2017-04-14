@@ -1,0 +1,33 @@
+global
+	maxconn 1024
+	daemon
+	nbproc 2
+	log localhost:1212 syslog
+defaults
+	mode	    http
+	timeout client  60000
+	timeout server  30000
+	timeout connect  4000
+	option      httpclose
+
+	balance	roundrobin
+	option forwardfor
+	
+	option httplog
+	log global
+	
+	# Setup backends
+$backends
+	
+	frontend http_proxy 
+		bind *:$listen_port
+	
+	# Setup access control lists
+$acl
+
+	# Setup backend usage
+$backenduse
+	
+	
+		
+	
